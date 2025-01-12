@@ -1,0 +1,7 @@
+Game_name:雪捕;
+Game_key:b24ad104577a39;
+Title_img:bg-room.png;
+Title_bgm:Light of the Seven.mp3 -vocal= Light of the Seven.mp3 -vocal= Light of the Seven.mp3 -vocal= Light of the Seven.mp3;
+Textbox_theme:imss;
+Description:悬疑题材视觉小说游戏;
+Game_Logo:bg-main.jpg;

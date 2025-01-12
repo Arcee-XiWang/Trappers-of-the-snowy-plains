@@ -1,0 +1,72 @@
+intro:下楼的路上，在吃饭的地方遇到了一个年轻人
+changeBg:bg-kitchen.png;
+changeFigure:BgSub_服务生-好吃.png -right;
+setAnimation:enter-from-bottom -target=fig-right;
+田安:诶，是客人吧，晚上好晚上好
+田安:饭已经在做了，很快就好，记得六点钟来吃晚饭哦，这边点不到外卖的
+changeFigure:none -right;
+choose:询问对方耳挂的事:label_1|和对方再见:label_2;
+label:label_1;
+田安:和周哥的一样吗，因为那个是我给他的;
+田安:这个耳挂是我母亲留下来的，对我来说算个信物吧，拿到这个代表我欠这个人一个要求;
+田安:虽然勇哥说这种谢法不太好，我也不太懂;
+choose:和对方再见:label_2;
+label:label_2; 
+田安:拜拜拜拜，缺什么都跟我说啊，我会去找的;
+changeFigure:none -right;
+changeFigure:BgSub_主角-平时.png -left -next;
+changeFigure:none -left;
+:还是去大堂看一眼吧;
+changeBg:bg-keting.png;
+changeBg:bg-ketingnobody.jpg;
+changeFigure:BgSub_读者-平静.png -right;
+changeFigure:BgSub_主角-平时.png -left -next;
+changeFigure:none -right-next;
+:这是……刚刚在前台的老周嘛，没想到他居然在这里看书;
+changeFigure:none -left-next;
+changeFigure:BgSub_读者-平静.png -right-next;
+周辰:饭还有半个小时就好了;
+changeFigure:none -right-next;
+changeFigure:BgSub_主角-平时.png -left -next;
+我:啊，哦哦;
+changeFigure:none -left-next;
+changeFigure:BgSub_读者-平静.png -right-next;
+周辰:我其实是这里的住客，但我是长住的，和老板比较熟;
+changeFigure:none -right-next;
+changeFigure:BgSub_主角-平时.png -left -next;
+我:唔…师傅你是做什么工作的;
+changeFigure:none -left-next;
+changeFigure:BgSub_读者-平静.png -right-next;
+周辰:读书影视博主，自媒体;
+changeFigure:none -right-next;
+changeFigure:BgSub_主角-平时.png -left -next;
+intro:他看的书有点像那本……|但他放到一边去了，这个角度有点看不清；
+changeFigure:none -left-next;
+changeFigure:BgSub_服务生-惊讶.png;
+setAnimation:enter-from-bottom -target=fig-center;
+田安:周哥！饭怎么样了！;
+changeFigure:none -center -next;
+changeFigure:BgSub_读者-不满.png;
+周辰:过二十分钟你去喊客人吃饭吧;
+changeFigure:none -right-next;
+changeFigure:BgSub_服务生-开心.png;
+田安:好嘞！;
+changeFigure:none -center -next;
+changeFigure:BgSub_主角-阴沉.png -left -next;
+我:（突然钻出一个人吓我一跳） -fontSize=default;
+changeFigure:none -left-next;
+changeFigure:BgSub_读者-平静.png -right-next;
+周辰:田安算是老板远房亲戚，他家里有点问题……如果这孩子有什么冒犯到你的我先提前替他道歉;
+changeFigure:none -right-next;
+changeFigure:BgSub_主角-平时.png -left -next;
+我:没关系的，能感觉到是个热情善良的孩子;
+changeFigure:none -left-next;
+changeFigure:BgSub_读者-平静.png -right-next;
+周辰:是啊;
+changeFigure:none -right-next;
+changeFigure:BgSub_主角-平时.png -left -next;
+我:不打扰你看书了，我先上去;
+changeFigure:none -left;
+:这两个人其实……都有点怪怪的
+:接下来要做什么呢
+choose:调查房间:调查房间.txt|去找李珑:去找李珑.txt|休息一会:休息和晚间剧情.txt;

@@ -1,0 +1,25 @@
+changeBg:bg-room2.jpg -transform={"oldFilm":1};
+bgm:中山真斗 -volume=20;
+changeFigure:none -right;
+changeFigure:BgSub_李珑-发呆.png -left -next;
+setAnimation:enter-from-left -target=fig-left;
+李珑:诶？你已经收拾好了吗;
+choose:只是来看看你的房间怎么样:label_1|来看看你有没有什么要帮忙的地方:label_1;
+label:label_1;
+李珑:嘛，咱们的房间应该是一样的，我觉得还蛮不错啦;
+李珑:我准备吃完饭去温泉一趟，不过编辑哥在催你拍素材，估计你没法享受了;
+李珑:他怕你又不看消息，让我提醒你经营自媒体的事
+changeFigure:none -left;
+changeFigure:BgSub_主角-平时.png -right -next;
+我:啊，是有这回事来着
+changeFigure:none -right;
+changeFigure:BgSub_李珑-发呆.png -left -next;
+李珑:加油吧大作家，距离成为网红作家还有一段距离哦
+changeFigure:none -left;
+changeFigure:BgSub_主角-平时.png -right -next;
+我:……喂
+bgm:none;
+changeFigure:none -right;
+:李珑看上去没什么问题的样子，看来下午晕车的情况也好了吧
+:接下来要做什么呢
+choose:调查房间:调查房间.txt|去大堂看看:去大堂看看.txt|休息一会:休息和晚间剧情.txt;

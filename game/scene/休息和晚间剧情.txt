@@ -1,0 +1,26 @@
+intro:在房间里休息了一会，就被喊下去吃晚饭;
+intro:晚餐吃的是铁锅炖大鹅，老板又做了一桌子菜，大家都吃撑了;
+changeBg:bg-kitchen.png;
+changeFigure:BgSub_李珑-开心.png -left -next;
+李珑:我要报社！好吃的菜就要拍给同事看！
+changeFigure:none -left;
+bgm:铃声.mp3;
+电话:叮铃铃——
+changeFigure:phone.png;
+setAnimation:move-front-and-back -target=fig-center;
+changeFigure:none -center;
+changeFigure:BgSub_主角-吃惊.png -left -next;
+我:诶？有电话
+bgm:none;
+changeFigure:none -left;
+changeFigure:phone.png;
+编辑:你是不是已经把营业的事情忘光了;
+changeFigure:none -center;
+changeFigure:BgSub_主角-阴沉.png -left -next;
+我:只是还没来得及拍嘛
+changeFigure:none -left;
+changeFigure:phone.png;
+编辑:现在去拍，半个小时内我要在看到你连照片带文案带宣传隔壁新书的草稿，人家上次可是帮你友情宣传了
+changeFigure:none -center;
+changeFigure:BgSub_主角-微笑.png -left -next;
+我:哎呀知道了

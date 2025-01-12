@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="图标.ico">
+    <title>雪原的捕食者</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background-image: linear-gradient(to top, rgb(117, 114, 114) 0%, #821a34 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 导航栏样式，添加阴影和圆角 */
+        nav {
+            background-color: #f4f4f4;
+            color: rgb(72, 70, 70);
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+            border-radius: 15px;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* 个人中心项的位置 */
+        .personal-center-li {
+            margin-left: auto;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: rgb(72, 70, 70);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+
+        /* 为游戏入口项添加阴影边框样式 */
+        nav ul li#game-entry a {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            padding: 5px 0px;
+            border-radius: 5px;
+        }
+
+
+        /* 个人中心下拉菜单相关样式 */
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            background-color: #f4f4f4;
+            top: 100%;
+            padding: 3px;
+            width: 48px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px black;
+            z-index: 2;
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        nav ul li ul li {
+            margin: 0;
+            margin-bottom: 3px;
+        }
+
+        nav ul li ul li a {
+            color: rgb(72, 70, 70);
+            text-decoration: center;
+            padding: 3px 5px;
+            display: block;
+            font-size: 12px;
+        }
+
+        /* 定义外层容器样式 */
+        .shell {
+            position: relative;
+            width: 60vw;
+            height: 60vw;
+            margin: 0;
+            color: white;
+            perspective: 1000px;
+            transform-origin: center;
+            /* 变形原点为中心 */
+        }
+
+        /* 定义内容容器样式 */
+        .content {
+            display: flex;
+            justify-content: center;
+            /* 主轴居中对齐 */
+            align-items: center;
+            /* 交叉轴居中对齐 */
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            /* 变形原点为中心 */
+            transform-style: preserve-3d;
+            /* 保持3D变换 */
+            transform: translateZ(-30vw) rotateY(0);
+            /* 变换：沿z轴平移-30vw，绕y轴旋转0度 */
+            animation: carousel 9s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            /* 动画：名称为carousel，持续时间9秒，无限循环，缓动函数为cubic-bezier(0.77, 0, 0.175, 1)，动画结束后保持最后状态 */
+        }
+
+        /* 定义项目样式 */
+        .item {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            max-width: 380px;
+            max-height: 380px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            background-size: cover;
+            object-fit: cover;
+            -webkit-box-reflect: below 25px -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.3));
+            /* 创建倒影效果 */
+        }
+
+        /* 第一个项目样式 */
+        .item:nth-child(1) {
+            background-image: url(./images/主角.jpg);
+            transform: rotateY(0) translateZ(35vw);
+            /* 变换：绕y轴旋转0度，沿z轴平移35vw */
+        }
+
+        /* 第二个项目样式 */
+        .item:nth-child(2) {
+            background-image: url(./images/老板.jpg);
+            transform: rotateY(72deg) translateZ(35vw);
+            /* 变换：绕y轴旋转72度，沿z轴平移35vw */
+        }
+
+        /* 第三个项目样式 */
+        .item:nth-child(3) {
+            background-image: url(./images/读者.jpg);
+            transform: rotateY(144deg) translateZ(35vw);
+            /* 变换：绕y轴旋转144度，沿z轴平移35vw */
+        }
+
+        /* 第四个项目样式 */
+        .item:nth-child(4) {
+            background-image: url(./images/服务生.jpg);
+            transform: rotateY(216deg) translateZ(35vw);
+            /* 变换：绕y轴旋转216度，沿z轴平移35vw */
+        }
+
+        /* 第五个项目样式 */
+        .item:nth-child(5) {
+            background-image: url(./images/李珑.jpg);
+            transform: rotateY(288deg) translateZ(35vw);
+            /* 变换：绕y轴旋转288度，沿z轴平移35vw */
+        }
+
+        /* 定义动画 */
+        @keyframes carousel {
+
+            0%,
+            12.5% {
+                transform: translateZ(-35vw) rotateY(0);
+                /* 变换：沿z轴平移-35vw，绕y轴旋转0度 */
+            }
+
+            20%,
+            32.5% {
+                transform: translateZ(-35vw) rotateY(-72deg);
+                /* 变换：沿z轴平移-35vw，绕y轴旋转-72度 */
+            }
+
+            40%,
+            52.5% {
+                transform: translateZ(-35vw) rotateY(-144deg);
+                /* 变换：沿z轴平移-35vw，绕y轴旋转-144度 */
+            }
+
+            60%,
+            72.5% {
+                transform: translateZ(-35vw) rotateY(-216deg);
+                /* 变换：沿z轴平移-35vw，绕y轴旋转-216度 */
+            }
+
+            80%,
+            100% {
+                transform: translateZ(-35vw) rotateY(-288deg);
+                /* 变换：沿z轴平移-35vw，绕y轴旋转-288度 */
+            }
+        }
+
+        /* 以下是响应式布局的媒体查询部分 */
+        /* 当屏幕宽度小于等于768px（例如手机屏幕常见尺寸） */
+        @media screen and (max-width: 768px) {
+            nav ul li {
+                margin-right: 10px;
+            }
+
+            nav ul li a {
+                font-size: 12px;
+            }
+
+            .shell {
+                width: 60vw;
+                height: 60vw;
+            }
+
+            .item {
+                width: 60vw;
+                height: 60vw;
+            }
+        }
+
+        /* 当屏幕宽度在769px到1024px之间（例如平板屏幕常见尺寸） */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            nav ul li {
+                margin-right: 15px;
+            }
+
+            nav ul li a {
+                font-size: 14px;
+            }
+
+            .shell {
+                width: 80vw;
+                height: 50vw;
+            }
+
+            .item {
+                width: 80vw;
+                height: 50vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</ a>
+            </li>
+            <li><a href="forum.html">论坛</ a>
+            </li>
+            <li><a href="gameguide.html">游戏攻略</ a>
+            </li>
+            <li><a href="recharge.html">充值中心</ a>
+            </li>
+            <li id="game-entry"><a href="index2.html">游戏入口</ a>
+            </li>
+            <li class="personal-center-li">
+                <a href="personcenter.html">个人中心</ a>
+                    <ul class="dropdown-menu">
+                        <li><a href="login.html">登录</a></li>
+                        <li><a href="register.html">注册</a></li>
+                    </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="shell">
+        <div class="content">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <script>
+        // 获取所有的轮播图项目元素（.item）
+        const items = document.querySelectorAll('.item');
+
+        // 遍历每个项目元素，添加点击事件监听器
+        items.forEach(item => {
+            item.addEventListener('click', function () {
+                // 点击时跳转到游戏攻略页面
+                window.location.href = 'gameguide.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

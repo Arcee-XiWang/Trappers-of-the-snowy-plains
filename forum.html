@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="shortcut icon" href="图标.ico">
+  <title>论坛</title>
+  <style>
+    /*返回首页按钮样式*/
+    a.return-home {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      text-decoration: none;
+      color: #333;
+      background-color: rgba(239, 230, 230);
+      padding: 5px 10px;
+      border-radius: 50px;
+    }
+
+    /* #exampleFormControlTextarea1 元素顶部外边距10px */
+    #exampleFormControlTextarea1 {
+      margin-top: 10px;
+    }
+
+    /* #publish 和 #browse 元素样式
+      - 宽度700px，水平居中
+      - 距离顶部50px */
+    #publish,
+    #browse {
+      width: 700px;
+      margin: 50px auto;
+    }
+
+    /* #publish 元素高度210px */
+    #publish {
+      height: 210px;
+    }
+
+    /* #browse 元素高度自适应 */
+    #browse {
+      height: auto;
+    }
+
+    /* #flo 元素左浮动 */
+    #flo {
+      float: left;
+    }
+
+    /* #but 和 #but2 元素样式
+      - 高度30px
+      - 右浮动 */
+    #but,
+    #but2 {
+      height: 30px;
+      float: right;
+    }
+
+    /* #exampleFormControlFile1 元素默认隐藏 */
+    #exampleFormControlFile1 {
+      display: none;
+    }
+
+    /* img 元素样式
+      - 左浮动
+      - 高度和宽度均为70px
+      - 右侧外边距20px */
+    .headimg {
+      float: left;
+      height: 70px;
+      width: 70px;
+      margin-right: 20px;
+    }
+
+    /*.side 元素样式
+      - 左浮动
+      - 顶部内边距10px */
+    .side {
+      float: left;
+      padding-top: 10px;
+    }
+
+    /*.side 元素内 p 标签样式
+      - 字体较小
+      - 顶部外边距10px */
+    .side>p {
+      font-size: smaller;
+      margin-top: 10px;
+    }
+
+    /*.side 元素内 a 标签顶部内边距5px */
+    .side>a {
+      padding-top: 5px;
+    }
+
+    /*.readnumber 和.reviewnumber 元素样式
+      - 右浮动
+      - 高度和宽度均为70px
+      - 左侧外边距10px
+      - 背景色为gainsboro
+      - 垂直方向居中排列内容 */
+    .readnumber,
+    .reviewnumber {
+      float: right;
+      height: 70px;
+      width: 70px;
+      margin-left: 10px;
+      background-color: gainsboro;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    /* 类名为.a 的元素
+      - 顶部外边距10px，底部外边距0 */
+    .a {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    /* 类名为.b 的元素顶部外边距3px */
+    .b {
+      margin-top: 3px;
+    }
+
+    /*.category 元素样式
+      - 高度80px
+      - 底部有1px的灰色边框
+      - 底部外边距20px */
+    .category {
+      height: 80px;
+      border-bottom: 1px solid rgb(127, 126, 126);
+      margin-bottom: 20px;
+    }
+
+    /* #page 元素样式
+      - 水平排列的弹性盒模型
+      - 内容分散对齐
+      - 字体较小
+      - 宽度200px，水平居中
+      - 底部内边距50px */
+    #page {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      font-size: smaller;
+      width: 200px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
+
+    /* #luntan 元素宽度300px，水平居中 */
+    #luntan {
+      margin: 0 auto;
+      width: 250px;
+      height: 200px;
+      margin-top: -10px;
+    }
+
+    #luntan>img {
+      width: 100%;
+    }
+
+    /* 屏幕宽度小于等于700px时
+      - #publish 和 #browse 元素宽度变为100% */
+    @media (max-width: 700px) {
+
+      #publish,
+      #browse {
+        width: 100%;
+      }
+
+      #luntan {
+        margin-top: 50px;
+      }
+    }
+
+    /* 屏幕宽度小于等于500px时
+      -.category 元素高度变为310px
+      -.side 元素取消浮动
+      - img 元素取消浮动并显示为块级元素
+      -.readnumber 和.reviewnumber 元素取消浮动 */
+    @media (max-width: 500px) {
+      .category {
+        height: 310px;
+      }
+
+      .side {
+        float: none;
+      }
+
+      img {
+        display: block;
+        float: none;
+      }
+
+      .readnumber,
+      .reviewnumber {
+        float: none;
+      }
+    }
+
+    /* 屏幕宽度小于等于300px时
+      - #publish 元素高度变为250px */
+    @media (max-width: 300px) {
+      #publish {
+        height: 250px;
+      }
+    }
+  </style>
+
+<body>
+  <a href="index.html" class="return-home">返回首页></a>
+  </div>
+  <div id="luntan">
+    <img src="images/论坛.png" alt="论坛">
+  </div>
+
+  <!-- 发布帖子的区域 -->
+  <div class="shadow-sm p-3 mb-5 bg-white rounded" id="publish">
+    <form>
+      <input type="text" placeholder="标题" id="biaoti">
+      <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <!-- 上传图片相关区域 -->
+      <div class="form-group" id="flo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-square"
+          viewBox="0 0 16 16" id="up">
+          <path fill-rule="evenodd"
+            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1.708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+        </svg>
+        <span>上传图片</span>
+        <span id="filename"></span>
+        <!-- 实际的文件选择框，默认隐藏 -->
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+      <!-- 发布按钮 -->
+      <button type="button" class="btn btn-outline-dark" id="but">
+        <div style="margin-top: -4px;">发布</div>
+      </button>
+      <!-- 匿名发布按钮 -->
+      <button type="button" class="btn btn-outline-dark" id="but2">
+        <div style="margin-top: -4px;">匿名发布</div>
+      </button>
+    </form>
+  </div>
+
+  <!-- 浏览帖子的区域 -->
+  <div class="shadow-sm p-3 mb-5 bg-white rounded" id="browse">
+    <!-- 单个帖子展示区域 -->
+    <div class="category">
+      <img src="images/抱抱海豹.png" alt="头像" class="headimg">
+      <div class="side">
+        <a href="post.html">如何通过第一关</a>
+        <!-- 帖子作者和发布时间 -->
+        <p>
+          <span class="host">海豹</span>
+          <span class="time">2024/5/1 13:23:09</span>
+        </p>
+      </div>
+      <!-- 阅读量展示区域 -->
+      <div class="readnumber">
+        <p class="a">阅读量</p>
+        <p class="b">333</p>
+      </div>
+      <!-- 评论量展示区域 -->
+      <div class="reviewnumber">
+        <p class="a">评论量</p>
+        <p class="b">33</p>
+      </div>
+    </div>
+
+    <!-- 另一个帖子展示区域 -->
+    <div class="category">
+      <img src="images/菜狗.png" alt="头像" class="headimg">
+      <div class="side">
+        <a href="post.html">如何通过第二关</a>
+        <p>
+          <span class="host">菜狗</span>
+          <span class="time">2024/7/3 8:31:09</span>
+        </p>
+      </div>
+      <div class="readnumber">
+        <p class="a">阅读量</p>
+        <p>111</p>
+      </div>
+      <div class="reviewnumber">
+        <p class="a">评论量</p>
+        <p>11</p>
+      </div>
+    </div>
+
+    <!-- 又一个帖子展示区域 -->
+    <div class="category">
+      <img src="images/长草颜.png" alt="头像" class="headimg">
+      <div class="side">
+        <a href="post.html">如何通过第三关</a>
+        <p>
+          <span class="host">长草颜</span>
+          <span class="time">2024/10/17 10:01:07</span>
+        </p>
+      </div>
+      <div class="readnumber">
+        <p class="a">阅读量</p>
+        <p>222</p>
+      </div>
+      <div class="reviewnumber">
+        <p class="a">评论量</p>
+        <p>22</p>
+      </div>
+    </div>
+  </div>
+  <!-- 分页导航区域 -->
+  <div id="page">
+    <div><a href="#">首页</a></div>
+    <div><a href="#">上一页</a></div>
+    <div><a href="#">1</a></div>
+    <div><a href="#">2</a></div>
+    <div><a href="#">3</a></div>
+    <div><a href="#">下一页</a></div>
+    <div><a href="#">尾页</a></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-7ymO4nGrkm372HoSbq1OY2DP4pEZnMiA+E0F3zPr+JQQtQ82gQ1HPY3QIVtztVua"
+    crossorigin="anonymous"></script>
+  <script>
+    let up = document.getElementById('up')
+    let exampleFormControlFile1 = document.getElementById('exampleFormControlFile1')
+    let filename = document.getElementById('filename')
+    let browse = document.getElementById('browse')
+
+    // 上传图片图标点击事件，触发文件选择框
+    up.addEventListener('click', function () {
+      exampleFormControlFile1.click()
+    })
+    // 文件选择框点击事件，显示选中的文件名
+    exampleFormControlFile1.addEventListener('change', function () {
+      filename.textContent = exampleFormControlFile1.files[0].name
+    })
+
+    // 普通发布帖子的函数
+    function pub() {
+      // 获取帖子标题
+      let a = document.getElementById('biaoti').value
+      if (a) {
+        // 获取当前时间
+        let b = new Date()
+        let c = b.toLocaleString()
+        // 获取浏览区域最后一个子元素
+        let lastChild = browse.lastChild;
+        // 创建新的帖子展示区域
+        let newNode = document.createElement('div')
+        browse.insertBefore(newNode, lastChild.nextSibling)
+        newNode.className = 'category'
+
+        // 创建并添加头像图片
+        let newImg = document.createElement('img')
+        newImg.src = 'images/吉伊.png'
+        newImg.alt = '头像'
+        newImg.className = "headimg"
+        newNode.appendChild(newImg)
+
+        // 创建并添加帖子标题和作者时间区域
+        let newSide = document.createElement('div')
+        newSide.className = 'side'
+        newNode.appendChild(newSide);
+
+        // 设置帖子标题和作者时间内容
+        let d = '<a href="post.html">' + a + '</a>' +
+          '<p>' +
+          '<span class="host">吉伊</span>' +
+          '<span class="time">' + c + '</span>' +
+          ' </p>'
+        newSide.innerHTML = d
+
+
+        // 创建并添加阅读量展示区域
+        let newReadnumber = document.createElement('div')
+        newReadnumber.className = 'readnumber'
+        newNode.appendChild(newReadnumber);
+        let e = '<p class="a">阅读量</p>' +
+          '<p>1</p>'
+        newReadnumber.innerHTML = e
+
+        // 创建并添加评论量展示区域
+        let newReviewnumber = document.createElement('div')
+        newReviewnumber.className = 'reviewnumber'
+        newNode.appendChild(newReviewnumber);
+        let f = '<p class="a">评论量</p>' +
+          '<p>1</p>'
+        newReviewnumber.innerHTML = f
+
+        // 清空标题和内容输入框
+        document.getElementById('biaoti').value = ''
+        document.getElementById('exampleFormControlTextarea1').value = ''
+      }
+    }
+
+    // 绑定发布按钮的点击事件，执行发布函数
+    document.getElementById('but').addEventListener('click', function () {
+      pub()
+    })
+
+    // 匿名发布帖子的函数，逻辑与普通发布类似
+    function pub4() {
+      let a = document.getElementById('biaoti').value
+      if (a) {
+        let b = new Date()
+        let c = b.toLocaleString()
+        let lastChild = browse.lastChild;
+        let newNode = document.createElement('div')
+        browse.insertBefore(newNode, lastChild.nextSibling)
+        newNode.className = 'category'
+
+        let newImg = document.createElement('img')
+        newImg.src = 'images/匿名.png'
+        newImg.alt = '头像'
+        newImg.className = "headimg"
+        newNode.appendChild(newImg)
+
+        let newSide = document.createElement('div')
+        newSide.className = 'side'
+        newNode.appendChild(newSide);
+
+        let d = '<a href="post.html">' + a + '</a>' +
+          '<p>' +
+          '<span class="host">匿名</span>' +
+          '<span class="time">' + c + '</span>' +
+          ' </p>'
+        newSide.innerHTML = d
+
+
+        let newReadnumber = document.createElement('div')
+        newReadnumber.className = 'readnumber'
+        newNode.appendChild(newReadnumber);
+        let e = '<p class="a">阅读量</p>' +
+          '<p>1</p>'
+        newReadnumber.innerHTML = e
+
+        let newReviewnumber = document.createElement('div')
+        newReviewnumber.className = 'reviewnumber'
+        newNode.appendChild(newReviewnumber);
+        let f = '<p class="a">评论量</p>' +
+          '<p>1</p>'
+        newReviewnumber.innerHTML = f
+
+        document.getElementById('biaoti').value = ''
+        document.getElementById('exampleFormControlTextarea1').value = ''
+      }
+    }
+
+    // 绑定匿名发布按钮的点击事件，执行匿名发布函数
+    document.getElementById('but2').addEventListener('click', function () {
+      pub4()
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="图标.ico">
+    <title>游戏攻略</title>
+    <style>
+        /*全局样式*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 5px;
+            padding: 5px;
+            line-height: 2.5;
+            background-color: #f8f8f8;
+        }
+
+        /*返回首页按钮样式*/
+        a.return-home {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            text-decoration: none;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /*攻略容器样式*/
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgb(239, 230, 230);
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        /*攻略标题样式*/
+        h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /*攻略内容样式*/
+        .character {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                "img h3"
+                "img desc";
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: start;
+        }
+
+        /*攻略图片样式*/
+        img {
+            grid-area: img;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /*攻略描述样式*/
+        h3 {
+            grid-area: h3;
+            text-align: left;
+            margin: 0;
+            color: #555;
+            font-size: 1.5em;
+        }
+
+        p {
+            grid-area: desc;
+            text-align: justify;
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        /* 响应式布局的媒体查询部分 */
+        /* 当屏幕宽度小于等于768px（手机等小屏幕设备） */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .character {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                grid-template-areas:
+                    "img"
+                    "h3"
+                    "desc";
+            }
+
+            h3 {
+                margin-top: 10px;
+            }
+        }
+
+        /* 当屏幕宽度在769px到1024px之间（平板等中等屏幕设备） */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .character {
+                grid-template-columns: 120px 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="return-home">返回首页></ a>
+    <div class="container">
+        <!-- 游戏背景部分 -->
+        <h2>游戏背景>>></h2>
+        <p>《雪捕》是一款悬疑题材的世界小说游戏，玩家将扮演一位青年推理作家，与朋友一同踏上前往雪乡温泉民宿的旅程。在旅程中，他们将在旅馆遭遇一些不同寻常的事情。在本游戏中，玩家需要通过对话与选择调查选项，推进游戏剧情，逐步抽丝剥茧，分析真相。最终，逃离雪乡。
+        </p>
+
+        <!-- 游戏角色介绍部分 -->
+        <h2>游戏角色介绍>>></h2>
+        <!-- 角色 1 -->
+        <div class="character">
+            <img src="images/主角.jpg" alt="主角">
+            <h3>玩家</h3>
+            <p>在争议中成长的推理作家，笔名为离迁。
+                高中时就在杂志连载短篇，在纸媒彻底衰落之前出版了第一本推理小说《混乱的表象》，但并未完成手法构建，出版反馈也是平平，后来转向社会派推理和叙述性诡计，目前勉强维持职业作家身份。</p>
+        </div>
+        <!-- 角色 2 -->
+        <div class="character">
+            <img src="images/读者.jpg" alt="老板">
+            <h3>周辰</h3>
+            <p>在旅馆长住的客人，旅馆老板王志勇的朋友。
+                从事自媒体行业，是一位有一定粉丝量的读书影视博主，但是总体来说收入不高，因此在朋友开的民宿长住并承担了前台的工作。
+                留着长发，身量也不高，第一眼看过去很容易误解其为女性。</p>
+        </div>
+        <!-- 角色 3 -->
+        <div class="character">
+            <img src="images/老板.jpg" alt="李珑">
+            <h3>王志勇</h3>
+            <p>民宿的老板，看上去热情沉稳，自称是在被互联网公司裁员后从事民宿行业的。
+                长期叼着一根烟，经常以笑眯眯的样子示人。</p>
+        </div>
+        <!-- 角色 4 -->
+        <div class="character">
+            <img src="images/服务生.jpg" alt="服务生">
+            <h3>田安</h3>
+            <p>据老板王志勇说是附近村子的年轻人，也是老板的远亲，因为家中出了些变故投奔老板。
+                初高中就辍学了，因此似乎没有什么常识的样子，但很擅长厨艺。</p>
+        </div>
+        <!-- 角色 5 -->
+        <div class="character">
+            <img src="images/李珑.jpg" alt="读者">
+            <h3>李珑</h3>
+            <p>曾经是一位调查记者，但目前已经转行成为娱乐记者，甚至经常报道一些网红博主的事迹。
+                似乎有些家底，喜欢旅游，性格开朗大方，但对自己之前在调查记者领域的经历讳莫如深。</p>
+        </div>
+
+        <!-- 视觉小说介绍部分 -->
+        <h2>视觉小说介绍>>></h2>
+        <p>视觉小说,是电子游戏的一种,是冒险游戏的分支游戏类型之一。</p>
+        <p>和一般游戏不同的是,视觉小说更注重剧情，而将游戏性几乎消减为零。视觉小说是有声读物(Audio
+            book)的衍生产物。可以将视觉小说理解为电子书,但是视觉小说含有的声音和图片远远比电子书丰富，但是声音和图片却不是视觉小说的核心。</p>
+        <p>综上所述,视觉小说是介于冒险游戏和电子书的中间产物。在欧美,视觉小说一般指日式的冒险游戏(如恋爱冒险游戏)。视觉小说是动画，幻灯片，小说，游戏的结合。因此视觉小说既可以被认为是动漫(不是动画也不是漫画)因为视觉小说既有着动图效果,也有静止的人物与风景CG
+            ，也可以被认为是游戏,或者小说。</p>
+    </div>
+</body>
+
+</html>

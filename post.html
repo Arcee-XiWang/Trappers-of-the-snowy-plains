@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="shortcut icon" href="图标.ico">
+  <title>帖子详情</title>
+  <style>
+    /*返回首页按钮样式*/
+    a.return-home {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      text-decoration: none;
+      color: #333;
+      background-color: rgba(239, 230, 230);
+      padding: 5px 10px;
+      border-radius: 50px;
+    }
+
+    /* 定义帖子主体区域样式
+       - 有阴影
+       - 高度520px，宽度900px，水平居中，底部外边距17px */
+    #bulidinghost {
+      box-shadow: 1px 1px 8px darkgray;
+      height: 520px;
+      width: 900px;
+      margin: 10px auto;
+      margin-bottom: 17px;
+    }
+
+    /* 定义楼主信息区域样式
+       - 左浮动，宽度110px，外边距20px，有右边框，高度480px */
+    #hostmessager {
+      float: left;
+      width: 110px;
+      margin: 20px;
+      border-right: 1px solid black;
+      height: 480px;
+    }
+
+    /* 定义楼主信息区域内图片样式
+       - 宽度为父元素的85%，底部内边距10px */
+    img {
+      width: 85%;
+      padding-bottom: 10px;
+    }
+
+    /* 定义楼主信息区域内p标签下span的样式
+       - 外边距为0 */
+    #hostmessager>p>span {
+      margin: 0;
+    }
+
+    /* 定义帖子内容区域样式
+       - 右浮动，宽度740px，底部外边距20px，高度500px */
+    #messager,
+    .reviewcontent {
+      float: right;
+      width: 740px;
+      margin-bottom: 20px;
+      height: 220px;
+    }
+
+    /* 定义帖子标题样式
+       - 高度50px，外边距，背景色，文本居中，字体较大 */
+    #headlineb {
+      height: 50px;
+      margin: 20px 30px 20px 0;
+      background-color: rgb(196, 195, 192);
+      text-align: center;
+      align-content: center;
+      font-size: larger;
+    }
+
+    /* 定义帖子内容主体部分样式
+       - 高度200px，外边距 */
+    #involve {
+      height: 200px;
+      margin: 20px 30px 50px 0;
+    }
+
+    /* 定义span元素样式
+       - 右侧外边距30px */
+    span {
+      margin-right: 30px;
+    }
+
+    /* 定义时间显示区域样式
+       - 高度30px，右浮动，宽度225px */
+    #time2,
+    .time3 {
+      height: 30px;
+      float: right;
+      width: 230px;
+    }
+
+    /* 定义评论区域样式
+       - 有阴影，高度245px，宽度900px，水平居中，底部外边距10px */
+    .review {
+      box-shadow: 1px 1px 8px darkgray;
+      height: 245px;
+      width: 900px;
+      margin: 10px auto;
+      margin-bottom: 10px;
+    }
+
+    /* 定义html为相对定位 */
+    html {
+      position: relative;
+    }
+
+    /* 定义回复弹出框样式
+       - 宽度600px，高度180px，绝对定位，背景色为白色 */
+    #response {
+      width: 600px;
+      height: 180px;
+      position: absolute;
+      left: 330px;
+      top: 200px;
+      background-color: white;
+    }
+
+    /* 定义回复弹出框内部分元素左浮动 */
+    #flo2 {
+      float: left;
+    }
+
+    /* 定义回复弹出框内按钮样式
+       - 高度30px，右浮动，左侧外边距5px */
+    #but2 {
+      height: 30px;
+      float: right;
+      margin-left: 5px;
+    }
+
+    /* 定义回复弹出框内另一个按钮样式
+       - 高度30px，右浮动 */
+    #but3 {
+      height: 30px;
+      float: right;
+    }
+
+    /* 定义回复弹出框内按钮文字的位置调整 */
+    #but2>div,
+    #but3>div {
+      margin-top: -4px;
+    }
+
+    /* 定义回复弹出框内表单样式
+       - 外边距15px */
+    form {
+      margin: 15px;
+    }
+
+    /* 定义回复弹出框关闭按钮样式
+       - 绝对定位 */
+    #closedown {
+      position: absolute;
+      right: -5px;
+      top: -5px;
+    }
+
+    /* 定义评论者信息区域样式
+       - 左浮动，宽度110px，外边距20px，有右边框，高度210px */
+    .reviewmessager {
+      float: left;
+      width: 110px;
+      margin: 20px;
+      border-right: 1px solid black;
+      height: 210px;
+    }
+
+    /* 定义评论者信息区域内p标签下span的样式
+       - 外边距为0 */
+    .reviewmessager>p>span {
+      margin: 0;
+    }
+
+    /* 定义评论内容主体部分样式
+       - 高度100px，外边距 */
+    .involve2 {
+      height: 100px;
+      margin: 35px 30px 50px 0;
+    }
+
+    /*页面宽度小于920px的时候*/
+    @media(max-width:920px) {
+
+      #bulidinghost,
+      .review {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+
+      #bulidinghost {
+        margin-top: 60px;
+      }
+
+      span {
+        margin-right: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="return-home">返回首页></a>
+  <!-- 楼主的帖子 -->
+  <div id="bulidinghost">
+    <div id="hostmessager">
+      <img src="images/菜狗.png" alt="头像">
+      <p><span>楼主：</span><span>菜狗</span></p>
+    </div>
+    <div id="messager">
+      <div id="headlineb">如何通过第二关</div>
+      <div id="involve">这样这样，那样那样</div>
+      <!-- 回复，转发，点赞 -->
+      <div>
+        <span id="repley">回复</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+        </svg>
+        <span>转发</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up"
+          viewBox="0 0 16 16" id="willyes">
+          <path
+            d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16" id="haveyes" style="display: none;">
+          <path
+            d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+        </svg>
+        <span>点赞</span>
+        <div id="time2">发布于：<span>2024/7/3 8:31:09</span></div>
+      </div>
+    </div>
+  </div>
+  <!-- 回复框 -->
+  <div id="response" class="rounded border border-success" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill"
+      viewBox="0 0 16 16" id="closedown">
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+    </svg>
+    <form>
+      <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+      </div>
+      <div class="form-group" id="flo2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up-square"
+          viewBox="0 0 16 16" id="up2">
+          <path fill-rule="evenodd"
+            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+        </svg>
+        <span>上传图片</span>
+        <span id="filename2"></span>
+        <input type="file" class="form-control-file" id="exampleFormControlFile2" style="display: none;">
+      </div>
+      <button type="button" class="btn btn-outline-dark" id="but2">
+        <div>回复</div>
+      </button>
+      <button type="button" class="btn btn-outline-dark" id="but3">
+        <div>匿名回复</div>
+      </button>
+
+    </form>
+  </div>
+  <!-- 一楼的回复 -->
+  <div class="review">
+    <div class="reviewmessager">
+      <img src="images/长草颜.png" alt="头像">
+      <p><span>1楼：</span><span>长草颜</span></p>
+    </div>
+    <div class="reviewcontent">
+      <div class="involve2">这样这样，那样那样</div>
+      <div>
+        <span id="repley2">回复</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+        </svg>
+        <span>转发</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up"
+          viewBox="0 0 16 16" id="willyes2">
+          <path
+            d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16" id="haveyes2" style="display: none;">
+          <path
+            d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+        </svg>
+        <span>点赞</span>
+        <div class="time3">发布于：<span>2024/7/3 9:31:09</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-7ymO4nGrkm372HoSbq1OY2DP4pEZnMiA+E0F3zPr+JQQtQ82gQ1HPY3QIVtztVua"
+    crossorigin="anonymous"></script>
+  <script>
+    let willyes = document.getElementById('willyes')
+    let haveyes = document.getElementById('haveyes')
+    let willyes2 = document.getElementById('willyes2')
+    let haveyes2 = document.getElementById('haveyes2')
+    let response = document.getElementById('response')
+    let repley = document.getElementById('repley')
+    let repley2 = document.getElementById('repley2')
+    let closedown = document.getElementById('closedown')
+    // 点击白色大拇指的函数
+    willyes.addEventListener('click', function () {
+      willyes.style.display = "none"
+      haveyes.style.display = "inline"
+    })
+    // 点击黑色大拇指的函数
+    haveyes.addEventListener('click', function () {
+      haveyes.style.display = "none"
+      willyes.style.display = "inline"
+    })
+    // 一楼的点赞函数
+    willyes2.addEventListener('click', function () {
+      willyes2.style.display = "none"
+      haveyes2.style.display = "inline"
+    })
+    haveyes2.addEventListener('click', function () {
+      haveyes2.style.display = "none"
+      willyes2.style.display = "inline"
+    })
+    // 弹出回复框的函数
+    repley.addEventListener('click', function () {
+      response.style.display = "block"
+    })
+    // repley2.addEventListener('click', function () {
+    //   response.style.display = "block"
+    // })
+    closedown.addEventListener('click', function () {
+      response.style.display = "none"
+    })
+    let up2 = document.getElementById('up2')
+    let exampleFormControlFile2 = document.getElementById('exampleFormControlFile2')
+    let filename2 = document.getElementById('filename2')
+    // 上传图片函数
+    up2.addEventListener('click', function () {
+      exampleFormControlFile2.click()
+    })
+    exampleFormControlFile2.addEventListener('change', function () {
+      filename2.textContent = exampleFormControlFile2.files[0].name
+    })
+    let bo = document.getElementsByTagName('body')[0]
+    var count = 2
+    function pub2() {
+      let b = document.getElementById('exampleFormControlTextarea2').value
+      if (b) {
+        let dati = new Date()
+        let c = dati.toLocaleString()
+        let newreview = document.createElement('div')
+        newreview.className = 'review'
+        bo.appendChild(newreview)
+
+        let newmessage = document.createElement('div')
+        newmessage.className = "reviewmessager"
+        newreview.appendChild(newmessage)
+
+        let newcontent = document.createElement('div')
+        newcontent.className = "reviewcontent"
+        newreview.appendChild(newcontent)
+
+        let newinvolve = document.createElement('div')
+        newinvolve.className = 'involve2'
+        newinvolve.innerText = b
+        newcontent.appendChild(newinvolve)
+
+        let involvebrother = document.createElement('div')
+        newcontent.appendChild(involvebrother)
+        const d = `
+          <span >回复</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+          </svg>
+          <span>转发</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up"
+          viewBox="0 0 16 16" id="willyes2">
+          <path
+          d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
+          </svg>
+            <span>点赞</span>
+            <div class="time3">发布于：<span>${c}</span></div>`
+        involvebrother.innerHTML = d
+
+        let newImg = document.createElement('img')
+        newImg.src = 'images/吉伊.png'
+        newImg.alt = '头像'
+        newmessage.appendChild(newImg)
+
+        let newp = document.createElement('p')
+        newmessage.appendChild(newp)
+        let e = '<p><span style="margin-right: 0;">' + count + '楼：</span><span>吉伊</span></p>'
+        newp.innerHTML = e
+        count = count + 1
+        document.getElementById('exampleFormControlTextarea2').value = ''
+      }
+    }
+    function pub3() {
+      let b = document.getElementById('exampleFormControlTextarea2').value
+      if (b) {
+        let dati = new Date()
+        let c = dati.toLocaleString()
+        let newreview = document.createElement('div')
+        newreview.className = 'review'
+        bo.appendChild(newreview)
+
+        let newmessage = document.createElement('div')
+        newmessage.className = "reviewmessager"
+        newreview.appendChild(newmessage)
+
+        let newcontent = document.createElement('div')
+        newcontent.className = "reviewcontent"
+        newreview.appendChild(newcontent)
+
+        let newinvolve = document.createElement('div')
+        newinvolve.className = 'involve2'
+        newinvolve.innerText = b
+        newcontent.appendChild(newinvolve)
+
+        let involvebrother = document.createElement('div')
+        newcontent.appendChild(involvebrother)
+        const d = `
+          <span >回复</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+          </svg>
+          <span>转发</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up"
+          viewBox="0 0 16 16" id="willyes2">
+          <path
+          d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
+          </svg>
+            <span>点赞</span>
+            <div class="time3">发布于：<span>${c}</span></div>`
+        involvebrother.innerHTML = d
+
+        let newImg = document.createElement('img')
+        newImg.src = 'images/匿名.png'
+        newImg.alt = '头像'
+        newmessage.appendChild(newImg)
+
+        let newp = document.createElement('p')
+        newmessage.appendChild(newp)
+        let e = '<p><span style="margin-right: 0;">' + count + '楼：</span><span>匿名</span></p>'
+        newp.innerHTML = e
+        count = count + 1
+        document.getElementById('exampleFormControlTextarea2').value = ''
+      }
+    }
+    document.getElementById('but2').addEventListener('click', function () {
+      pub2()
+      response.style.display = "none"
+    })
+    document.getElementById('but3').addEventListener('click', function () {
+      pub3()
+      response.style.display = "none"
+    })
+  </script>
+</body>
+
+</html>

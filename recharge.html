@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="图标.ico">
+    <title>充值中心</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            background-color: #f8f8f8;
+        }
+
+        /*返回首页按钮样式*/
+        a.return-home {
+            position:absolute;
+            top: 10px;
+            left: 10px;
+            text-decoration: none;
+            color: #333;
+            background-color: rgba(239,230,230);
+            padding: 5px 10px;
+            border-radius: 50px;
+        }
+        /* 容器样式 */
+      .container {
+            max-width: 800px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        /* 左边游戏充值框样式 */
+        .left-section {
+            flex-basis: 45%;
+            background-color: rgba(239,230,230);
+            padding: 50px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
+        }
+
+        /* 右边周边购买框样式 */
+        .right-section {
+            flex-basis: 45%;
+            background-color: rgba(239,230,230);
+            padding: 50px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgba(72,70,70);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 10px;
+            color: rgba(72,70,70);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(72,70,70);
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        select {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #7ddc80;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* 周边商品样式 */
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .product img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .product-info {
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        /* 成功提示样式 */
+        .success-message {
+            color: green;
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .balance-message {
+            color: #333;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+
+       .error-message {
+            color: red;
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        /* 当屏幕宽度小于等于768px（手机等小屏幕设备） */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column; /* 将flex布局的方向改为垂直排列 */
+            }
+
+            .container {
+                    width: 90%; /* 调整容器宽度，使其在小屏幕上占比更合适 */
+                }
+
+            .left-section,
+            .right-section {
+                    flex-basis: 100%; /* 让左右两个板块在小屏幕上占满一行 */
+                    margin-bottom: 20px; /* 为两个板块之间添加一些间距 */
+                }
+
+            a.return-home {
+                top: 20px; /* 调整返回首页按钮的位置，避免与其他内容重叠 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="return-home">返回首页></a>
+    <div class="container left-section">
+        <h1>游戏充值</h1>
+        <label for="game-account">游戏账号：</label>
+        <input type="text" id="game-account">
+        <label for="recharge-amount">充值金额（元）：</label>
+        <input type="number" id="recharge-amount">
+        <label for="payment-method">支付方式：</label>
+        <select id="payment-method">
+            <option value="alipay">支付宝</option>
+            <option value="wechat">微信支付</option>
+            <option value="bank-card">银行卡支付</option>
+        </select>
+        <button onclick="recharge()">充值</button>
+        <p id="recharge-message" class="success-message">充值成功！</p >
+        <p id="balance-message" class="balance-message"></p >
+    </div>
+    <div class="container right-section">
+        <h1>周边购买</h1>
+        <div class="product">
+            <img src="images/keyring.jpg" alt="钥匙扣">
+            <div class="product-info">
+                <h3>钥匙扣</h3>
+                <p>精美的游戏主题钥匙扣。</p >
+                <span class="product-price">15 元</span>
+                <button onclick="buyProduct('keyring')">购买</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="images/tshirt.jpg" alt="T恤衫">
+            <div class="product-info">
+                <h3>T 恤衫</h3>
+                <p>舒适的游戏主题 T 恤衫。</p >
+                <span class="product-price">50 元</span>
+                <button onclick="buyProduct('tshirt')">购买</button>
+            </div>
+        </div>
+        <div class="product">
+            <img src="images/postcard.jpg" alt="明信片">
+            <div class="product-info">
+                <h3>明信片</h3>
+                <p>漂亮的游戏主题明信片。</p >
+                <span class="product-price">5 元</span>
+                <button onclick="buyProduct('postcard')">购买</button>
+            </div>
+        </div>
+        <p id="purchase-success-message" class="success-message"></p >
+        <p id="purchase-error-message" class="error-message"></p >
+    </div>
+
+    <script>
+        let accountBalance = 0; // 初始账户余额
+
+        //定义充值函数
+        function recharge() {
+            //获取用户的游戏账号
+            const account = document.getElementById('game-account').value;
+            //获取用户充值金额
+            const amount = document.getElementById('recharge-amount').value;
+            //获取用户选择的充值方式
+            const method = document.getElementById('payment-method').value;
+            //判断用户是否输入了账号、金额和充值方式
+            if (account && amount && method) {
+                accountBalance += parseInt(amount);
+                document.getElementById('recharge-message').style.display = 'block';
+                document.getElementById('balance-message').style.display = 'block';
+                document.getElementById('balance-message').innerText = `账户余额：${accountBalance} 元`;
+            } else {
+                alert('请填写完整信息。');
+            }
+        }
+
+        //定义购买商品函数
+        function buyProduct(productName) {
+            //获取用户选择的商品名称,并从productPrices对象中获取对应的价格
+            const productPrices = {
+                keyring: 15,
+                tshirt: 50,
+                postcard: 5
+            };
+            //获取用户账户余额
+            const price = productPrices[productName];
+            //判断用户账户余额是否足够购买商品
+            if (accountBalance >= price) {
+                accountBalance -= price;
+                document.getElementById('purchase-success-message').style.display = 'block';
+                document.getElementById('purchase-success-message').innerText = `购买成功！您购买了 ${productName}`;
+                document.getElementById('balance-message').style.display = 'block';
+                document.getElementById('balance-message').innerText = `账户余额：${accountBalance} 元`;
+            } else {
+                document.getElementById('purchase-error-message').style.display = 'block';
+                document.getElementById('purchase-error-message').innerText = `余额不足，无法购买 ${productName}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

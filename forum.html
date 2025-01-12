@@ -260,7 +260,7 @@
         <!-- 帖子作者和发布时间 -->
         <p>
           <span class="host">海豹</span>
-          <span class="time">2024/5/1 13:23:09</span>
+          <span class="time">2024/05/01 13:23:09</span>
         </p>
       </div>
       <!-- 阅读量展示区域 -->
@@ -282,7 +282,7 @@
         <a href="post.html">如何通过第二关</a>
         <p>
           <span class="host">菜狗</span>
-          <span class="time">2024/7/3 8:31:09</span>
+          <span class="time">2024/07/03 08:31:09</span>
         </p>
       </div>
       <div class="readnumber">
@@ -353,8 +353,19 @@
       let a = document.getElementById('biaoti').value
       if (a) {
         // 获取当前时间
-        let b = new Date()
-        let c = b.toLocaleString()
+         function padZero(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        let dati = new Date();
+        let year = dati.getFullYear();
+        let month = padZero(dati.getMonth() + 1);
+        let day = padZero(dati.getDate());
+        let hour = padZero(dati.getHours());
+        let minute = padZero(dati.getMinutes());
+        let second = padZero(dati.getSeconds());
+
+        let c = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
         // 获取浏览区域最后一个子元素
         let lastChild = browse.lastChild;
         // 创建新的帖子展示区域
@@ -414,8 +425,19 @@
     function pub4() {
       let a = document.getElementById('biaoti').value
       if (a) {
-        let b = new Date()
-        let c = b.toLocaleString()
+         function padZero(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        let dati = new Date();
+        let year = dati.getFullYear();
+        let month = padZero(dati.getMonth() + 1);
+        let day = padZero(dati.getDate());
+        let hour = padZero(dati.getHours());
+        let minute = padZero(dati.getMinutes());
+        let second = padZero(dati.getSeconds());
+
+        let c = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
         let lastChild = browse.lastChild;
         let newNode = document.createElement('div')
         browse.insertBefore(newNode, lastChild.nextSibling)

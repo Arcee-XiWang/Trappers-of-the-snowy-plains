@@ -15,6 +15,18 @@
       margin: 50px auto;
     }
 
+    .inblock {
+      display: inline-block;
+    }
+
+    .none {
+      display: none;
+    }
+
+    .block {
+      display: block;
+    }
+
     /* 设置列表项按钮的样式，宽度200px，高度100px */
     .list-group-item-action {
       width: 200px;
@@ -40,14 +52,31 @@
       display: none;
     }
 
-    /* 当#yes按钮被激活（按下）时，放大1.08倍 */
-    #yes:active {
+    /* 当#sure按钮被激活（按下）时，放大1.08倍 */
+    #sure:active {
       transform: scale(1.08);
     }
 
     /* 设置#btn按钮的顶部外边距为20px */
     #btn {
       margin-top: 20px;
+    }
+
+    #appear {
+      position: absolute;
+      left: 560px;
+      top: 130px;
+      width: 150px;
+      height: 60px;
+      font-size: larger;
+      background-color: rgb(194, 194, 197);
+      text-align: center;
+      padding: 15px 0px 15px 15px;
+      border-radius: 5px;
+    }
+
+    #yes {
+      display: inline;
     }
 
     /* 设置表单内div元素的顶部外边距为10px */
@@ -72,8 +101,17 @@
       background-color: rgb(206, 205, 205);
     }
 
+    /*表单大小*/
     .form-control-lg {
       width: 300px;
+    }
+
+    /* 设置进度条的样式 */
+    #advance {
+      height: 20px;
+      margin-top: 8px;
+      width: 347px;
+      display: inline;
     }
 
     /* 屏幕宽度小于等于900px时*/
@@ -106,7 +144,7 @@
         <input type="file" id="fileInput" accept="image/*" style="display: none;">
       </div>
       <!-- 展示用户各项信息 -->
-      <p>用户名：吉伊</p>
+      <p id="getusername"></p>
       <p>年龄：5</p>
       <p>性别：无</p>
       <p>关卡进度：1-1</p>
@@ -120,28 +158,59 @@
     <!-- 注销账号相关区域，初始隐藏 -->
     <div id="logout" style="display: none;">
       <p id="ask">确定要注销账号吗？</p>
-      <button type="button" class="btn btn-outline-secondary" id="yes">确定</button>
+      <button type="button" class="btn btn-outline-secondary" id="sure">确定</button>
       <p id="success">注销成功！</p>
     </div>
     <!-- 修改密码表单区域，初始隐藏 -->
     <form id="adapt" style="display: none;">
       <div id="divold">
-        <label for="old">原密码</label>
+        <label for="old" class="block">原密码</label>
         <!-- 输入原密码的输入框 -->
-        <input type="password" class="form-control form-control-lg" id="old">
+        <input type="password" class="form-control form-control-lg inblock" id="old">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"
+          class="yes lg none" id="yes1">
+          <path
+            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1.02-.022Z" />
+        </svg>
       </div>
-      <div id="divnew">
-        <label for="new">新密码</label>
+      <div>
+        <label for="renew" class="block">新密码</label>
         <!-- 输入新密码的输入框 -->
-        <input type="password" class="form-control form-control-lg" id="renew">
+        <input type="password" class="form-control form-control-lg inblock" id="renew">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"
+          class="yes lg none" id="yes2">
+          <path
+            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1.02-.022Z" />
+        </svg>
+        <div class="progress" id="advance">
+          <!-- 弱强度进度条 -->
+          <div class="progress-bar progress-bar-striped" role="progressbar" id="weak" style="width: 33.3% ;"
+            aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">弱</div>
+          <!-- 中强度进度条 -->
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="middle"
+            style="width: 33.3%; " aria-valuenow="33.3" aria-valuemin="0" aria-valuemax="100">中</div>
+          <!-- 高强度进度条 -->
+          <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" id="strong" style="width: 33.4%;"
+            aria-valuenow="33.4" aria-valuemin="0" aria-valuemax="100">强</div>
+        </div>
+        <!-- 密码提示信息 -->
+        <small id="emailHelp" class="form-text text-muted">长度为6-10位,至少包括数字、大小写英文字母中的两种</small>
       </div>
-      <div id="divconfirm">
-        <label for="confirm">确认密码</label>
+      <div>
+        <label for="confirm" class="block">确认密码</label>
         <!-- 确认新密码的输入框 -->
-        <input type="password" class="form-control form-control-lg" id="confirm">
+        <input type="password" class="form-control form-control-lg inblock" id="confirm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"
+          class="yes lg none" id="yes3">
+          <path
+            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1.02-.022Z" />
+        </svg>
       </div>
       <!-- 提交修改密码的按钮 -->
-      <button type="submit" class="btn btn-outline-secondary" id="btn">提交修改</button>
+      <button type="submit" class="btn btn-outline-secondary" id="btn" disabled>提交修改</button>
+      <!-- 注册成功提示框，初始隐藏 -->
+      <div id="appear" style="display: none;">注册成功！</div>
+
     </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -153,12 +222,19 @@
   <script>
     let relate = document.getElementById('relate')
     let logout = document.getElementById('logout')
-    let yes = document.getElementById('yes')
+    let sure = document.getElementById('sure')
     let success = document.getElementById('success')
     let adapt = document.getElementById('adapt')
     let old = document.getElementById('old')
     let renew = document.getElementById('renew')
     let confirm = document.getElementById('confirm')
+    let yes1 = document.getElementById('yes1')
+    let yes2 = document.getElementById('yes2')
+    let yes3 = document.getElementById('yes3')
+    let advance = document.getElementById('advance')
+    let weak = document.getElementById('weak')
+    let middle = document.getElementById('middle')
+    let strong = document.getElementById('strong')
     let btn = document.getElementById('btn')
     let one = document.getElementById('one')
     let two = document.getElementById('two')
@@ -166,6 +242,93 @@
     let four = document.getElementById('four')
     let five = document.getElementById('five')
     let begin = document.getElementById('begin')
+    let getusername = document.getElementById('getusername')
+    // 根据注册的用户名，填写个人中心的用户名
+    getusername.innerText = '用户名：' + localStorage.getItem('username')
+    var pw = localStorage.getItem('password')
+    // 如果输入的原密码和注册的密码一致，则显示对勾，鼠标移出输入框或者按下回车键都可以启动判断
+    old.addEventListener('blur', function () {
+      if (old.value == pw) {
+        document.getElementById('yes1').style.display = 'inline-block'
+      }
+      else { alert('原密码输入错误') }
+    })
+    old.addEventListener('keydown', function (event) {
+      if (event.keyCode === 13) {
+        if (old.value == pw) {
+          document.getElementById('yes1').style.display = 'inline-block'
+        }
+        else { alert('原密码输入错误') }
+      }
+    })
+    // 密码强度判断函数
+    function renewfunc() {
+      // 如果密码输入框有值
+      if (renew.value) {
+        advance.style.display = 'flex'
+        middle.style.display = 'none'
+        strong.style.display = 'none'
+        // 检查密码是否包含数字,字母
+        let hasnu = /\d/.test(renew.value)
+        let hasdo = /[a-z]/.test(renew.value)
+        let hasup = /[A-Z]/.test(renew.value)
+        // 如果密码包含小写字母、大写字母和数字
+        if (hasdo && hasup && hasnu) {
+          // 显示中强度和高强度进度条
+          middle.style.display = 'flex'
+          strong.style.display = 'flex'
+          // 如果密码长度在6到10位之间
+          if (renew.value.length >= 6 && renew.value.length <= 10) {
+            yes2.style.display = 'inline-block'
+          }
+          else {
+            alert('密码长度不符合要求，请重新输入')
+          }
+        }
+        // 如果密码包含小写字母和数字，或小写字母和大写字母，或大写字母和数字
+        else if (hasdo && hasnu || hasdo && hasup || hasdo && hasup) {
+          middle.style.display = 'flex'
+          if (renew.value.length >= 6 && renew.value.length <= 10) {
+            yes2.style.display = 'inline-block'
+          }
+        }
+        else {
+          alert('密码长度不符合要求，请重新输入')
+        }
+      }
+      else { alert('密码不能为空') }
+    }
+    //鼠标移出输入框或者按下回车时，判断密码是否符合要求
+    renew.addEventListener('blur', renewfunc)
+    renew.addEventListener('keydown', function (event) {
+      if (event.keyCode == 13) { renewfunc() }
+    })
+    //判断两次输入的密码是否一致，一致则可以按下提交按钮，不一致则警告两次输入的密码不一致
+    function confirmfunc() {
+      if (confirm.value == renew.value) {
+        yes3.style.display = 'inline-block'
+        btn.disabled = false
+      }
+      else {
+        alert('两次输入的密码不一致')
+      }
+    }
+    //鼠标移出输入框或者按下回车时，判断两次输入的密码是否一致
+    confirm.addEventListener('blur', confirmfunc)
+    confirm.addEventListener('click', function () {
+      confirmfunc()
+    })
+
+    //点击提交按钮，将新密码赋值给保存的密码
+    btn.addEventListener('click', function () {
+      localStorage.setItem('password', renew.value)
+      document.getElementById('appear').style.display = 'block'
+    })
+    //
+    sure.addEventListener('click', function () {
+      localStorage.clear()
+      window.location.href = 'index.html'
+    })
     // 返回首页函数
     one.addEventListener('click', function () {
       document.getElementById('firstpage').click()
@@ -245,7 +408,7 @@
         begin.style.display = 'block'
       }
     })
-    yes.addEventListener("click", function () {
+    sure.addEventListener("click", function () {
       success.style.display = 'block'
     })
   </script>

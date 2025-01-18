@@ -167,12 +167,21 @@
   <script>
     let without = document.getElementById('without');
     let button = document.getElementById('button');
-    // 登录按钮点击事件：显示登录成功提示，1秒后跳转到首页
+    let pw = document.getElementById('password')
+    let un = document.getElementById('username')
+    // 点击登录按钮点击事件：判断输入的用户名和保存的用户名是否一致，不一致则警告用户名不存在
+    // 再判断输入的密码和保存的密码是否一致，不一致则警告密码错误，一致则显示登录成功，1秒后跳转到首页
     button.addEventListener('click', function () {
-      document.getElementById('appear').style.display = 'block';
-      setTimeout(function () {
-        document.getElementById('firstjump').click();
-      }, 1000);
+      if (localStorage.getItem('username') == un.value) {
+        if (localStorage.getItem('password') == pw.value) {
+          document.getElementById('appear').style.display = 'block';
+          setTimeout(function () {
+            document.getElementById('firstjump').click();
+          }, 1000);
+        }
+        else alert('密码错误')
+      }
+      else alert('用户名不存在')
     });
   </script>
 </body>

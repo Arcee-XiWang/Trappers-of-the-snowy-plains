@@ -78,9 +78,9 @@
     }
 
     /* 设置输入框的宽度、高度和字体大小 */
-    #exampleInputEmail1,
-    #exampleInputPassword1,
-    #exampleInputPassword2 {
+    #username,
+    #password1,
+    #password2 {
       width: 300px;
       height: 40px;
       font-size: larger;
@@ -138,9 +138,9 @@
         width: 100%;
       }
 
-      #exampleInputEmail1,
-      #exampleInputPassword1,
-      #exampleInputPassword2 {
+      #username,
+      #password1,
+      #password2 {
         width: 100%
       }
     }
@@ -160,7 +160,7 @@
         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
       </svg>
       <!-- 用户名输入框，placeholder提示用户输入内容 -->
-      <input type="text" id="exampleInputEmail1" placeholder="用户名">
+      <input type="text" id="username" placeholder="用户名">
       <!-- 用户名验证通过的图标，初始隐藏 -->
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="lg" viewBox="0 0 16 16"
         id="yes0">
@@ -176,7 +176,7 @@
           d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
       </svg>
       <!-- 密码输入框，type为password表示输入内容会被隐藏 -->
-      <input type="password" id="exampleInputPassword1" placeholder="密码" style="display: inline;">
+      <input type="password" id="password1" placeholder="密码" style="display: inline;">
       <!-- 密码验证通过的图标，初始隐藏 -->
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="lg" viewBox="0 0 16 16"
         id="yes">
@@ -206,7 +206,7 @@
           d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
       </svg>
       <!-- 确认密码输入框 -->
-      <input type="password" id="exampleInputPassword2" placeholder="确认密码">
+      <input type="password" id="password2" placeholder="确认密码">
       <!-- 确认密码验证通过的图标，初始隐藏 -->
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="lg" viewBox="0 0 16 16"
         id="yes2">
@@ -228,11 +228,10 @@
   </form>
   <!-- 注册成功提示框，初始隐藏 -->
   <div id="appear" style="display: none;">注册成功！</div>
-  <!-- 引入jQuery库，用于简化DOM操作和事件处理 -->
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
-  <!-- 引入Bootstrap的JavaScript文件，提供各种交互功能 -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-7ymO4nGrkm372HoSbq1OY2DP4pEZnMiA+E0F3zPr+JQQtQ82gQ1HPY3QIVtztVua"
     crossorigin="anonymous"></script>
@@ -244,9 +243,9 @@
     let yes = document.getElementById('yes')
     let yes0 = document.getElementById('yes0')
     let yes2 = document.getElementById('yes2')
-    let username = document.getElementById('exampleInputEmail1')
-    let pas1 = document.getElementById('exampleInputPassword1')
-    let pas2 = document.getElementById('exampleInputPassword2')
+    let username = document.getElementById('username')
+    let pas1 = document.getElementById('password1')
+    let pas2 = document.getElementById('password2')
     let but = document.getElementById('but')
     let che = document.getElementById('exampleCheck1')
     let advance = document.getElementById('advance')
@@ -303,7 +302,6 @@
       if (event) {
         event.preventDefault()
       }
-
     }
 
     // 确认密码判断函数
@@ -323,30 +321,38 @@
     }
     // 用户名判断函数
     function yesfunc0() {
-      if (event.keyCode === 13) {
-        if (username.value) {
-          count0 = 1
-          event.preventDefault()
-          yes0.style.display = 'inline-block'
-          if (che.checked && (count0 + count1 + count2) == 3) {
-            but.disabled = false
-          }
-        }
-        else {
-          alert('用户名不能为空！')
+      if (username.value) {
+        count0 = 1
+        event.preventDefault()
+        yes0.style.display = 'inline-block'
+        if (che.checked && (count0 + count1 + count2) == 3) {
+          but.disabled = false
         }
       }
     }
+    // 鼠标不在输入框或者按下回车键，都会触发对输入内容的检测
+    username.addEventListener('blur', function () {
+      yesfunc0()
+    }
+    )
     username.addEventListener('keydown', function (event) {
       if (event.keyCode === 13) {
         yesfunc0()
       }
     })
+    pas1.addEventListener('blur', function () {
+      yesfunc()
+    }
+    )
     pas1.addEventListener('keydown', function (event) {
       if (event.keyCode === 13) {
         yesfunc()
       }
     })
+    pas2.addEventListener('blur', function () {
+      yesfunc2()
+    }
+    )
     pas2.addEventListener('keydown', function (event) {
       if (event.keyCode === 13) {
         yesfunc2()
@@ -362,12 +368,15 @@
         }
       }
     })
-    // 注册成功后跳转函数
+    // 注册成功后，长期保存用户名和密码，提示注册成功，跳转首页
     but.addEventListener('click', function () {
       document.getElementById('appear').style.display = 'block'
+      localStorage.setItem('username', username.value)
+      localStorage.setItem('password', pas1.value)
       setTimeout(function () {
         document.getElementById('firstjump').click()
-      }, 1000);
+      }, 1000
+      )
     })
   </script>
 </body>

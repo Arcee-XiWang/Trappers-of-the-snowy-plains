@@ -38,12 +38,11 @@
       float: left;
     }
 
-    /* 定义右侧外层容器样式，右浮动，宽度700px，顶部内边距100px，此处outline属性值有误，应为合法值 */
+    /* 定义右侧外层容器样式，右浮动，宽度700px，顶部内边距100px*/
     .outer {
       float: right;
       width: 700px;
       padding-top: 100px;
-      outline: 1px s;
     }
 
     /* 设置#success元素的样式，顶部内边距10px，初始隐藏 */
@@ -286,7 +285,7 @@
           }
         }
         // 如果密码包含小写字母和数字，或小写字母和大写字母，或大写字母和数字
-        else if (hasdo && hasnu || hasdo && hasup || hasdo && hasup) {
+        else if (hasdo && hasnu || hasdo && hasup || hasnu && hasup) {
           middle.style.display = 'flex'
           if (renew.value.length >= 6 && renew.value.length <= 10) {
             yes2.style.display = 'inline-block'
@@ -315,8 +314,8 @@
     }
     //鼠标移出输入框或者按下回车时，判断两次输入的密码是否一致
     confirm.addEventListener('blur', confirmfunc)
-    confirm.addEventListener('click', function () {
-      confirmfunc()
+    confirm.addEventListener('keydown', function (event) {
+      if (event.keyCode == 13) { confirmfunc() }
     })
 
     //点击提交按钮，将新密码赋值给保存的密码
